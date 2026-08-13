@@ -1,0 +1,12 @@
+#!/bin/bash -e
+
+# Remove a stale server PID file (common with volume-mounted tmp/).
+rm -f /rails/tmp/pids/server.pid
+
+# When the process is the Rails server (direct or via thruster), prepare DB + CSS.
+if echo " $* " | grep -Eq ' (./bin/rails|bin/rails|rails) .*server( |$)'; then
+  ./bin/rails db:prepare
+  ./bin/rails tailwindcss:build
+fi
+
+exec "${@}"

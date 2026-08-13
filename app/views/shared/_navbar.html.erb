@@ -1,0 +1,28 @@
+<header class="r-nav">
+  <%= link_to root_path, class: "r-logo", data: { turbo: false } do %>
+    <span class="r-logo-mark" aria-hidden="true">b</span>
+    <span class="hidden text-lg font-bold tracking-tight sm:inline">bookkit</span>
+  <% end %>
+
+  <div class="mx-2 hidden flex-1 justify-center md:flex">
+    <label class="sr-only" for="global-search">Search Bookkit</label>
+    <input
+      id="global-search"
+      type="search"
+      class="r-search"
+      placeholder="Search Bookkit"
+      autocomplete="off"
+    >
+  </div>
+
+  <div class="ml-auto flex items-center gap-2">
+    <button type="button" class="r-btn-ghost hidden sm:inline-flex" title="Get app">Get App</button>
+    <button type="button" class="r-btn-secondary">Log In</button>
+    <button type="button" class="r-btn-primary">Sign Up</button>
+    <button type="button" class="r-btn-ghost px-2" aria-label="User menu">
+      <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+      </svg>
+    </button>
+  </div>
+</header>

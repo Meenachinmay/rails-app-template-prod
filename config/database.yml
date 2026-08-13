@@ -1,0 +1,43 @@
+# PostgreSQL configuration.
+# Prefer DATABASE_URL when set (Docker Compose provides it for the web service).
+# Host-side Rails against Dockerized Postgres: use POSTGRES_* from .env (port 5435).
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV.fetch("POSTGRES_HOST", "localhost") %>
+  port: <%= ENV.fetch("POSTGRES_PORT", 5435) %>
+  username: <%= ENV.fetch("POSTGRES_USER", "bookkit") %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD", "password") %>
+
+development:
+  <<: *default
+  database: <%= ENV.fetch("POSTGRES_DB", "bookkit_development") %>
+
+test:
+  <<: *default
+  database: bookkit_test
+
+# Production uses DATABASE_URL (or BOOKKIT_DATABASE_PASSWORD).
+# Solid Cache / Queue / Cable use separate DBs when multi-db is enabled.
+production:
+  primary: &primary_production
+    <<: *default
+    database: bookkit_production
+    username: bookkit
+    password: <%= ENV["BOOKKIT_DATABASE_PASSWORD"] %>
+    host: <%= ENV.fetch("POSTGRES_HOST", "localhost") %>
+    port: <%= ENV.fetch("POSTGRES_PORT", 5432) %>
+  cache:
+    <<: *primary_production
+    database: bookkit_production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    database: bookkit_production_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    database: bookkit_production_cable
+    migrations_paths: db/cable_migrate

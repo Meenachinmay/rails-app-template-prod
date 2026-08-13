@@ -1,0 +1,90 @@
+<aside class="flex w-full flex-col gap-3 lg:w-80 lg:shrink-0">
+  <section class="r-widget">
+    <div class="h-14 border-b border-border-light bg-hover"></div>
+    <div class="r-widget-body !pt-0">
+      <div class="-mt-6 mb-3 flex items-end gap-2">
+        <div class="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-card text-xl font-bold text-text">
+          b/
+        </div>
+        <div class="pb-1">
+          <h2 class="text-base font-bold text-text">r/bookkit</h2>
+          <p class="text-xs text-text-muted">Your books, kits, and lists</p>
+        </div>
+      </div>
+
+      <p class="mb-3 text-sm leading-relaxed text-text">
+        Official community for Bookkit — organize books, kits, and reading lists in one place.
+      </p>
+
+      <dl class="mb-3 grid grid-cols-2 gap-2 border-y border-border-light py-3 text-center">
+        <div>
+          <dt class="text-base font-bold text-text">1</dt>
+          <dd class="text-xs text-text-muted">Member</dd>
+        </div>
+        <div>
+          <dt class="text-base font-bold text-text">
+            <span class="mr-1 inline-block h-2 w-2 rounded-full bg-text align-middle"></span>1
+          </dt>
+          <dd class="text-xs text-text-muted">Online</dd>
+        </div>
+      </dl>
+
+      <button type="button" class="r-btn-primary w-full">Joined</button>
+      <button type="button" class="r-btn-secondary mt-2 w-full">Create Post</button>
+    </div>
+  </section>
+
+  <section class="r-widget">
+    <h3 class="r-widget-header">About Bookkit</h3>
+    <div class="r-widget-body space-y-2">
+      <p>
+        Whiteboard UI: white surfaces, dark gray type, light gray borders.
+        Reddit-style layout without accent color.
+      </p>
+      <ul class="space-y-1.5">
+        <li class="flex items-center gap-2">
+          <span class="r-pill">Surface · #FFFFFF</span>
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="r-pill">Text · #1A1A1A</span>
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="r-pill">Border · #E5E5E5</span>
+        </li>
+      </ul>
+      <p class="pt-1 text-xs text-text-weak">
+        Created <%= Time.zone.today.strftime("%b %d, %Y") %>
+      </p>
+    </div>
+  </section>
+
+  <section class="r-widget">
+    <h3 class="r-widget-header">System status</h3>
+    <div class="r-widget-body space-y-2 text-xs">
+      <div class="flex justify-between gap-2">
+        <span>Environment</span>
+        <span class="font-mono font-medium text-text"><%= Rails.env %></span>
+      </div>
+      <div class="flex justify-between gap-2">
+        <span>Ruby</span>
+        <span class="font-mono font-medium text-text"><%= RUBY_VERSION %></span>
+      </div>
+      <div class="flex justify-between gap-2">
+        <span>Rails</span>
+        <span class="font-mono font-medium text-text"><%= Rails.version %></span>
+      </div>
+      <div class="flex justify-between gap-2">
+        <span>Database</span>
+        <span class="max-w-[10rem] truncate text-right font-mono font-medium text-text" title="<%= ActiveRecord::Base.connection.current_database %>">
+          <%= ActiveRecord::Base.connection.adapter_name %>
+        </span>
+      </div>
+      <a href="/up" class="mt-2 inline-block text-xs font-bold">Health check →</a>
+    </div>
+  </section>
+
+  <p class="px-2 text-[10px] leading-relaxed text-text-weak">
+    Bookkit, Inc. © <%= Time.zone.today.year %>. User Agreement · Privacy Policy ·
+    Content Policy · Moderator Code of Conduct
+  </p>
+</aside>
